@@ -4,7 +4,7 @@
 \name{OctoSQL}
 \alias{OctoSQL}
 \alias{dbConnect,OctoSQLDriver-method}
-\title{Athena DBI wrapper}
+\title{OctoSQL DBI wrapper}
 \usage{
 OctoSQL()
 
@@ -13,16 +13,12 @@ OctoSQL()
 \arguments{
 \item{drv}{An object created by \code{Athena()}}
 
+\item{config}{path to config file}
+
 \item{...}{Other options}
-
-\item{region}{the AWS region}
-
-\item{S3OutputLocation}{S3 bucket where results will be saved to}
-
-\item{Schema}{Athena schema to use}
 }
 \description{
-Athena DBI wrapper
+OctoSQL DBI wrapper
 
 Authentication credentials are read from the DefaultAWSCredentialsProviderChain, which includes the .aws folder and
 environment variables.
@@ -30,7 +26,4 @@ environment variables.
 \examples{
 \dontrun{
 }
-}
-\seealso{
-\href{http://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html#jdbc-options}{Athena Manual} for more connections options.
 }

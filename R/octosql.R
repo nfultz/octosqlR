@@ -8,7 +8,7 @@
 setClass("OctoSQLDriver", contains = "DBIDriver")
 
 
-#' Athena DBI wrapper
+#' OctoSQL DBI wrapper
 #'
 #' @export
 OctoSQL <- function() {
@@ -33,12 +33,9 @@ setClass("OctoSQLConnection",
 #' environment variables.
 #'
 #' @param drv An object created by \code{Athena()}
-#' @param region the AWS region
-#' @param S3OutputLocation S3 bucket where results will be saved to
-#' @param Schema Athena schema to use
+#' @param config path to config file
 #' @param ... Other options
 #' @rdname OctoSQL
-#' @seealso \href{http://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html#jdbc-options}{Athena Manual} for more connections options.
 #' @export
 #' @examples
 #' \dontrun{
@@ -51,7 +48,7 @@ setMethod("dbConnect", "OctoSQLDriver",
 })
 
 
-setOldClass("connection")
+setOldClass("pipe")
 
 #' OctoSQL results class.
 #' 
@@ -59,7 +56,7 @@ setOldClass("connection")
 #' @export
 setClass("OctoSQLResult", 
          contains = "DBIResult",
-         slots = list(handle = "connection")
+         slots = list(handle = "pipe")
 )
 
 
@@ -81,7 +78,8 @@ setMethod("dbSendQuery", "OctoSQLConnection", function(conn, statement, ...) {
 #' @importFrom DBI dbClearResult
 setMethod("dbClearResult", "OctoSQLResult", function(res, ...) {
   # free resources
-  close(res@handle)
+  # close(res@handle)
+  TRUE
 })
 #> [1] "dbClearResult"
 
