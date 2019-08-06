@@ -15,9 +15,9 @@ OctoSQL <- function() {
   new("OctoSQLDriver")
 }
 
-#' Athena connection class.
+#' OctoSQL connection class.
 #'
-#' Class which represents the Athena connections.
+#' Class which represents the OctoSQL connections.
 #'
 #' @export
 #' @importClassesFrom DBI DBIConnection
@@ -29,10 +29,10 @@ setClass("OctoSQLConnection",
   )
 )
 
-#' Authentication credentials are read from the DefaultAWSCredentialsProviderChain, which includes the .aws folder and
-#' environment variables.
+#' Authentication credentials are not read in R, but a configuration file path
+#' is passed to octosql.
 #'
-#' @param drv An object created by \code{Athena()}
+#' @param drv An object created by \code{OctoSQL()}
 #' @param config path to config file
 #' @param ... Other options
 #' @rdname OctoSQL
@@ -68,7 +68,11 @@ setClass("OctoSQLResult",
 #' @importFrom DBI dbSendQuery
 setMethod("dbSendQuery", "OctoSQLConnection", function(conn, statement, ...) {
   # some code
-  handle <- pipe(sprintf("~/bin/octosql '%s' -c %s -o csv", statement, conn@config))
+  ## path to the binary
+  file <- "octosql-linux"
+  path <- file.path(system.file(package = 'octosql'), file)
+  
+  handle <- pipe(sprintf("%s '%s' -c %s -o csv",path, statement, conn@config))
   new("OctoSQLResult", handle=handle, ...)
 })
 #> [1] "dbSendQuery"
@@ -81,20 +85,16 @@ setMethod("dbClearResult", "OctoSQLResult", function(res, ...) {
   # close(res@handle)
   TRUE
 })
-#> [1] "dbClearResult"
 
 
 ########################3
 
-#' Retrieve records from Kazam query
+#' Retrieve records from OctoSQL query
 #' @export
 #' @importFrom DBI dbFetch
 setMethod("dbFetch", "OctoSQLResult", function(res, n = -1, ...) {
   read.csv(res@handle)
 })
-#> [1] "dbFetch"
-
-# (optionally)
 
 
 #' @export
@@ -102,5 +102,4 @@ setMethod("dbFetch", "OctoSQLResult", function(res, n = -1, ...) {
 setMethod("dbHasCompleted", "OctoSQLResult", function(res, ...) { 
   TRUE
 })
-#> [1] "dbHasCompleted"
 

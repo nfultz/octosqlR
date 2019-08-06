@@ -3,10 +3,10 @@
 \docType{methods}
 \name{dbFetch,OctoSQLResult-method}
 \alias{dbFetch,OctoSQLResult-method}
-\title{Retrieve records from Kazam query}
+\title{Retrieve records from OctoSQL query}
 \usage{
 \S4method{dbFetch}{OctoSQLResult}(res, n = -1, ...)
 }
 \description{
-Retrieve records from Kazam query
+Retrieve records from OctoSQL query
 }

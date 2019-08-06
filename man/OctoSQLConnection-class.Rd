@@ -3,8 +3,8 @@
 \docType{class}
 \name{OctoSQLConnection-class}
 \alias{OctoSQLConnection-class}
-\title{Athena connection class.}
+\title{OctoSQL connection class.}
 \description{
-Class which represents the Athena connections.
+Class which represents the OctoSQL connections.
 }
 \keyword{internal}

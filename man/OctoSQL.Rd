@@ -11,7 +11,7 @@ OctoSQL()
 \S4method{dbConnect}{OctoSQLDriver}(drv, config, ...)
 }
 \arguments{
-\item{drv}{An object created by \code{Athena()}}
+\item{drv}{An object created by \code{OctoSQL()}}
 
 \item{config}{path to config file}
 
@@ -20,8 +20,8 @@ OctoSQL()
 \description{
 OctoSQL DBI wrapper
 
-Authentication credentials are read from the DefaultAWSCredentialsProviderChain, which includes the .aws folder and
-environment variables.
+Authentication credentials are not read in R, but a configuration file path
+is passed to octosql.
 }
 \examples{
 \dontrun{
